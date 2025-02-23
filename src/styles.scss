@@ -1,1 +1,137 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap");
+
+$main-color: #9965dd;
+$light-color: #d0c2e1;
+$shadow: rgba(145, 158, 171, 0.2) 0px 2px 4px -1px,
+  rgba(145, 158, 171, 0.14) 0px 4px 5px 0px,
+  rgba(145, 158, 171, 0.12) 0px 1px 10px 0px;
+$font-family: "Encode Sans Expanded", sans-serif;
+$rating-color: #9c73ca;
+$main-transition: 0.8s;
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: $light-color;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #895cce;
+  border-radius: 50px;
+  box-shadow: 0 0 20px 50px #895cce;
+  border-radius: 2px;
+}
+
+.nav-link {
+  transition: unset !important;
+}
+
+.active-link {
+  background-color: $main-color;
+  color: #fff !important;
+  border-radius: 5px;
+}
+
+body {
+  font-family: $font-family;
+}
+
+.rating-color {
+  color: $rating-color;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.font-sm {
+  font-size: 12px;
+}
+
+.text-main {
+  color: $main-color;
+}
+
+.text-main-light {
+  color: $light-color;
+}
+
+.bg-main {
+  background-color: $main-color !important;
+}
+
+.bg-main-light {
+  background-color: $light-color !important;
+}
+
+.main-btn {
+  border: unset;
+  cursor: pointer;
+  color: #fff !important;
+  background-color: $main-color !important;
+  padding: 4px 8px;
+  transition: background-color $main-transition;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #895cce !important;
+  }
+
+  &:disabled {
+    background-color: #67509a !important;
+    color: #ffffff8e !important;
+    cursor: not-allowed;
+  }
+}
+
+input:focus {
+  box-shadow: 0 0 0 0.25rem rgba(153, 101, 221, 0.39) !important;
+  border-color: $main-color !important;
+}
+
+.product {
+  padding: 6px 9px;
+  border-radius: 5px;
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: $shadow;
+    border: solid 1px $main-color;
+
+    .add-btn {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  }
+
+  .add-btn {
+    transition: transform 1s, opacity 1s, background-color 1s;
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.ngx-pagination .current {
+  background: $main-color !important;
+  border-radius: 5px !important;
+}
+
+.ngx-pagination a:hover,
+.ngx-pagination button:hover {
+  background: #d0c2e1 !important;
+  border-radius: 5px !important;
+  color: $main-color !important;
+}
+
+.ngx-pagination a,
+.ngx-pagination button {
+  color: #895cce !important;
+}
+
+.toast-success {
+  position: fixed !important;
+  bottom: 0 !important;
+  right: 0 !important;
+}
