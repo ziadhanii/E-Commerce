@@ -1,12 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap");
 
 $main-color: #8741e3;
-$light-color: #d0c2e1;
+$light-color: #f0f3f2;
+$second-color: #b89eda;
+$second-light-color: #d0c2e1;
 $shadow: rgba(145, 158, 171, 0.2) 0px 2px 4px -1px,
   rgba(145, 158, 171, 0.14) 0px 4px 5px 0px,
   rgba(145, 158, 171, 0.12) 0px 1px 10px 0px;
 $font-family: "Encode Sans Expanded", sans-serif;
-$rating-color: #9c73ca;
+$rating-color: #ffc908;
 $main-transition: 0.8s;
 
 ::-webkit-scrollbar {
@@ -66,6 +68,9 @@ body {
   background-color: $light-color !important;
 }
 
+.bg-secondary {
+  background-color: $second-light-color !important;
+}
 .main-btn {
   border: unset;
   cursor: pointer;
@@ -80,7 +85,27 @@ body {
   }
 
   &:disabled {
-    background-color: #67509a !important;
+    background-color: #686277 !important;
+    color: #ffffff8e !important;
+    cursor: not-allowed;
+  }
+}
+
+.secondry-btn {
+  border: unset;
+  cursor: pointer;
+  color: #fff !important;
+  background-color: lighten($main-color, 20%) !important;
+  padding: 4px 8px;
+  transition: background-color $main-transition;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: lighten(#895cce, 10%) !important;
+  }
+
+  &:disabled {
+    background-color: #686277 !important;
     color: #ffffff8e !important;
     cursor: not-allowed;
   }

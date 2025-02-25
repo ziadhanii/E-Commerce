@@ -1,1 +1,13 @@
-<p>blank-layout works!</p>
+<app-nav-blank />
+
+
+<div class="container-fluid main-section">
+  <router-outlet />
+</div>
+
+
+<app-footer />
+
+<button (click)="goToUp()" class="btn-up">
+  <i class="fa-solid fa-angle-up"></i>
+</button>
