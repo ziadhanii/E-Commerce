@@ -21,18 +21,32 @@
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active-link" routerLink="/brands">Brands</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active-link" routerLink="/cart">Cart</a>
-        </li>
+
       </ul>
 
       <ul class="navbar-nav ms-auto mt-2 mt-lg-0 align-items-center">
-        <li class="nav-item d-flex gap-3 me-3">
-          <a href="#" class="text-dark"><i class="fab fa-facebook"></i></a>
-          <a href="#" class="text-dark"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="text-dark"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="text-dark"><i class="fab fa-linkedin"></i></a>
+
+        <li class="nav-item">
+          <a class="nav-link position-relative" routerLink="/cart">
+            <span class="fas fa-cart-shopping fa-2x text-dark"></span>
+            <span class="badge bg-main position-absolute top-0 end-0">{{cartNum}}</span>
+          </a>
         </li>
+
+
+
+        <li class="nav-item d-flex gap-3 me-3">
+          <a href="#" class="text-dark fa-lg"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="text-dark fa-lg"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="text-dark fa-lg"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="text-dark fa-lg"><i class="fab fa-linkedin"></i></a>
+        </li>
+
+
+
+
+
+
         <li class="nav-item">
           <span (click)="signOut()" role="button " class="main-btn btn">Sign Out</span>
         </li>

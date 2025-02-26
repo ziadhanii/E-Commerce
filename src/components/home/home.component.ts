@@ -3,10 +3,11 @@ import { CutTextPipe } from './../../core/pipe/cut-text.pipe';
 import { CommonModule } from '@angular/common';
 import type { product } from '../../core/interfaces/product';
 import { ProductService } from './../../core/services/product.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import type { Category } from '../../core/interfaces/category';
 import { RouterLink } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -21,7 +22,8 @@ export class HomeComponent implements OnInit {
   products: product[] = [];
   categories: Category[] = [];
 
-  constructor(private productService: ProductService, private cartService: CartService) { }
+  constructor(private productService: ProductService, private cartService: CartService,
+    private toastr: ToastrService, private renderer: Renderer2) { }
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe({
@@ -38,14 +40,22 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  addProductToCart(productId: string): void {
-    this.cartService.addToCart(productId).subscribe({
+  addProduct(id: any, element: HTMLButtonElement): void {
+    this.renderer.setAttribute(element, 'disabled', 'true')
+    this.cartService.addToCart(id).subscribe({
       next: (response) => {
         console.log(response);
+        this.toastr.success(response.message, '', {
+          positionClass: 'toast-top-right'
+        });
+        this.renderer.removeAttribute(element, 'disabled');
+        this.cartService.cartNumber.next(response.numOfCartItems);
+      },
+      error: (error) => {
+        this.renderer.removeAttribute(element, 'disabled')
       }
     });
   }
-
   categoryOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,

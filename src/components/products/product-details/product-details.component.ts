@@ -1,9 +1,11 @@
+import { CartService } from './../../../core/services/cart.service';
 import { CommonModule } from '@angular/common';
 import { ProductService } from './../../../core/services/product.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { CutTextPipe } from '../../../core/pipe/cut-text.pipe';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-details',
@@ -12,10 +14,13 @@ import { CutTextPipe } from '../../../core/pipe/cut-text.pipe';
   styleUrl: './product-details.component.scss'
 })
 export class ProductDetailsComponent implements OnInit {
-  addProduct(arg0: any) {
-    throw new Error('Method not implemented.');
-  }
-  constructor(private activatedRoute: ActivatedRoute, private productService: ProductService) { }
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private productService: ProductService,
+    private renderer: Renderer2,
+    private cartService: CartService,
+    private toastr: ToastrService) { }
 
   productId: string | null = '';
   productDetails: any = {};
@@ -38,6 +43,23 @@ export class ProductDetailsComponent implements OnInit {
     );
 
 
+  }
+
+  addProduct(id: any, element: HTMLButtonElement): void {
+    this.renderer.setAttribute(element, 'disabled', 'true')
+    this.cartService.addToCart(id).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.toastr.success(response.message, '', {
+          positionClass: 'toast-top-right'
+        });
+        this.renderer.removeAttribute(element, 'disabled');
+        this.cartService.cartNumber.next(response.numOfCartItems);
+      },
+      error: (error) => {
+        this.renderer.removeAttribute(element, 'disabled')
+      }
+    });
   }
 
 

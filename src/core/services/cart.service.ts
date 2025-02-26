@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,14 @@ export class CartService {
     token: localStorage.getItem('token')
   }
 
-  constructor(private http: HttpClient) { }
+  cartNumber: BehaviorSubject<number> = new BehaviorSubject(0);
 
+  constructor(private http: HttpClient) { }
+  getLoggedUserCart(): Observable<any> {
+    return this.http.get(this.baseUrl + '/cart', {
+      headers: this.myToken
+    })
+  }
   addToCart(productId: string): Observable<any> {
     return this.http.post(this.baseUrl + '/cart',
       {
@@ -23,6 +29,30 @@ export class CartService {
         headers: this.myToken
       }
     )
+  }
+
+  removeFromCart(productId: string) {
+    return this.http.delete(this.baseUrl + `/cart/${productId}`,
+      {
+        headers: this.myToken
+      });
+  }
+
+  updateCartCount(productId: string, count: number) {
+    return this.http.put(this.baseUrl + `/cart/${productId}`,
+      {
+        count: count
+      },
+      {
+        headers: this.myToken
+      });
+  }
+
+  clearCart() {
+    return this.http.delete(this.baseUrl + '/cart',
+      {
+        headers: this.myToken
+      });
   }
 
 }

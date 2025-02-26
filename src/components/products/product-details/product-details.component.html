@@ -24,7 +24,10 @@
             {{productDetails.ratingsAverage}}
           </p>
         </div>
-        <button (click)="addProduct(productDetails._id)" class="main-btn w-100">+AddToCart</button>
+        <div class="card-footer bg-white border-0 text-center">
+          <button (click)="addProduct(productDetails._id,btnAdd)" #btnAdd class="main-btn w-100"> + AddToCart</button>
+        </div>
+
       </div>
     </div>
   </div>

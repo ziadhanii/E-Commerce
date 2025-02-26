@@ -1,1 +1,39 @@
-<p>cart works!</p>
+<section class="container-fluid py-3" *ngIf="cartDetails?.products?.length > 0; else emptyCart">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8 bg-main-light rounded shadow p-4">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h3">Shop Cart</h1>
+        <button (click)="clearCart()" class="btn btn-sm btn-outline-danger">Clear Cart</button>
+      </div>
+      <p class="text-main fw-bold">Total Price: {{cartDetails.totalCartPrice | currency:'EGP'}} </p>
+
+      <div *ngFor="let item of cartDetails.products; let i = index" class="row border-bottom py-3 align-items-center">
+        <div class="col-3 col-sm-2">
+          <img class="img-fluid rounded" [src]="item.product.imageCover" [alt]="item.product.title">
+        </div>
+        <div class="col-9 col-sm-10 d-flex justify-content-between align-items-center">
+          <div>
+            <h3 class="h6 mb-1">{{item.product.title}}</h3>
+            <p class="text-main small">Price: {{item.price | currency:'EGP'}}</p>
+            <button #btnRemove (click)="removeItem(item.product._id, btnRemove)" class="btn m-0 p-0 text-main border-0">
+              <i class="fas fa-trash-can"></i> Remove
+            </button>
+          </div>
+          <div class="d-flex align-items-center">
+            <button #btnRemove (click)="changeCount(item.count - 1, item.product._id, btnRemove)"
+              class="btn btn-sm btn-outline-secondary">-</button>
+            <span class="mx-2">{{item.count}}</span>
+            <button #btnAdd (click)="changeCount(item.count + 1, item.product._id, btnAdd)"
+              class="btn btn-sm btn-outline-secondary">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #emptyCart>
+  <div class="text-center py-5">
+    <h2>Your Cart is Empty</h2>
+  </div>
+</ng-template>
