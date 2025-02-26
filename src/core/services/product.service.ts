@@ -9,8 +9,8 @@ export class ProductService {
   baseUrl = 'https://ecommerce.routemisr.com/api/v1';
   constructor(private http: HttpClient) { }
 
-  getProducts(): Observable<any> {
-    return this.http.get(this.baseUrl + '/products');
+  getProducts(pageNum: number = 1): Observable<any> {
+    return this.http.get(this.baseUrl + `/products?page=${pageNum}`);
   }
 
   getProduct(id: string | null): Observable<any> {
