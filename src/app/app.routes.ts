@@ -21,6 +21,7 @@ export const routes: Routes = [
 
       { path: 'categories', loadComponent: () => import('../components/categories/categories.component').then(m => m.CategoriesComponent), title: 'Categories' },
       { path: 'payment/:id', loadComponent: () => import('../components/payment/payment.component').then(m => m.PaymentComponent), title: 'Payment' },
+      { path: 'allorders', loadComponent: () => import('../components/all-orders/all-orders.component').then(m => m.AllOrdersComponent), title: 'All Orders' },
     ]
   },
   //auth
