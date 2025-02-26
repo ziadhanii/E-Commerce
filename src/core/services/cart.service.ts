@@ -55,4 +55,15 @@ export class CartService {
       });
   }
 
+  checkOut(cartId: string | null, orderInfo: object): Observable<any> {
+    return this.http.post(this.baseUrl + `/orders/checkout-session/${cartId}?url=http://localhost:4200`,
+      {
+        shippingAddress: orderInfo
+      },
+      {
+        headers: this.myToken
+      }
+    )
+  }
+
 }

@@ -19,7 +19,8 @@ export const routes: Routes = [
 
       { path: 'brands', loadComponent: () => import('../components/brands/brands.component').then(m => m.BrandsComponent), title: 'Brands' },
 
-      { path: 'categories', loadComponent: () => import('../components/categories/categories.component').then(m => m.CategoriesComponent), title: 'Categories' }
+      { path: 'categories', loadComponent: () => import('../components/categories/categories.component').then(m => m.CategoriesComponent), title: 'Categories' },
+      { path: 'payment/:id', loadComponent: () => import('../components/payment/payment.component').then(m => m.PaymentComponent), title: 'Payment' },
     ]
   },
   //auth

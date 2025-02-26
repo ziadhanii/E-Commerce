@@ -28,8 +28,12 @@
           </div>
         </div>
       </div>
+      <button class="main-btn mt-3 px-2" [routerLink]="['/payment' , cartDetails._id]">
+        Online Payment <img src="assets/images/visa-1.svg" alt="visa-img" class="visa-img">
+      </button>
     </div>
   </div>
+
 </section>
 
 <ng-template #emptyCart>
