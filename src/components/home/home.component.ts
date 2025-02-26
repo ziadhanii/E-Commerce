@@ -1,3 +1,4 @@
+import { CartService } from './../../core/services/cart.service';
 import { CutTextPipe } from './../../core/pipe/cut-text.pipe';
 import { CommonModule } from '@angular/common';
 import type { product } from '../../core/interfaces/product';
@@ -5,20 +6,22 @@ import { ProductService } from './../../core/services/product.service';
 import { Component, OnInit } from '@angular/core';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import type { Category } from '../../core/interfaces/category';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, CutTextPipe, CarouselModule],
+  imports: [CommonModule, CutTextPipe, CarouselModule, RouterLink],
   standalone: true,
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
+
   products: product[] = [];
   categories: Category[] = [];
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private cartService: CartService) { }
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe({
@@ -35,6 +38,13 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  addProductToCart(productId: string): void {
+    this.cartService.addToCart(productId).subscribe({
+      next: (response) => {
+        console.log(response);
+      }
+    });
+  }
 
   categoryOptions: OwlOptions = {
     loop: true,

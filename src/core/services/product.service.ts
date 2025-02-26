@@ -13,7 +13,7 @@ export class ProductService {
     return this.http.get(this.baseUrl + '/products');
   }
 
-  getProduct(id: number): Observable<any> {
+  getProduct(id: string | null): Observable<any> {
     return this.http.get(this.baseUrl + '/products/' + id);
   }
 
