@@ -21,4 +21,12 @@ export class ProductService {
     return this.http.get(this.baseUrl + '/categories');
   }
 
+  getCategory(id: string | null): Observable<any> {
+    return this.http.get(this.baseUrl + '/categories/' + id);
+  }
+
+  getSubCategories(id: string | null): Observable<any> {
+    return this.http.get(this.baseUrl + `/categories/${id}/subcategories`);
+  }
+
 }

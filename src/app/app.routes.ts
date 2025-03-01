@@ -20,8 +20,13 @@ export const routes: Routes = [
       { path: 'brands', loadComponent: () => import('../components/brands/brands.component').then(m => m.BrandsComponent), title: 'Brands' },
 
       { path: 'categories', loadComponent: () => import('../components/categories/categories.component').then(m => m.CategoriesComponent), title: 'Categories' },
+
+      { path: 'categoryDetails/:id', loadComponent: () => import('../components/categories/category-details/category-details.component').then(m => m.CategoryDetailsComponent), title: 'Category Details' },
+
       { path: 'payment/:id', loadComponent: () => import('../components/payment/payment.component').then(m => m.PaymentComponent), title: 'Payment' },
+
       { path: 'allorders', loadComponent: () => import('../components/all-orders/all-orders.component').then(m => m.AllOrdersComponent), title: 'All Orders' },
+
       { path: 'forget-password', loadComponent: () => import('../components/forget-password/forget-password.component').then(m => m.ForgetPasswordComponent), title: 'Forget Password' }
     ]
   },

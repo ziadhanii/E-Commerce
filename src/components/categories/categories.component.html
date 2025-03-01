@@ -1,10 +1,11 @@
 <section class="py-5">
   <div class="container">
-    <h2 class="mb-5 text-uppercase fw-bold">Categories</h2>
+    <h2 class="mb-5 text-uppercase fw-bold text-center">Categories</h2>
 
-    <div class="row g-4 " role="button">
+    <div class="row g-4 justify-content-center">
       <div *ngFor="let category of categories" class="col-sm-6 col-md-4 col-lg-3">
-        <div class="category-card border border-2 rounded-3 p-3 shadow-sm h-100 text-center">
+        <div class="category-card border border-2 rounded-3 p-3 shadow-sm h-100 text-center" role="button"
+          [routerLink]="['/categoryDetails', category._id]">
           <img class="img-fluid rounded mb-3" [src]="category.image" [alt]="category.name"
             style="max-height: 250px; object-fit: cover;" />
           <h3 class="text-main fs-5 fw-semibold">{{ category.name }}</h3>
