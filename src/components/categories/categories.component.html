@@ -1,8 +1,8 @@
 <section class="py-5">
   <div class="container">
-    <h2 class="mb-4 fw-bold text-uppercase">Our Categories</h2>
+    <h2 class="mb-4 fw-bold text-uppercase text-main">Our Categories</h2>
 
-    <div class="row g-4 justify-content-center">
+    <div class="row g-4">
       <div *ngFor="let category of categories" class="col-sm-6 col-md-4 col-lg-3">
         <div class="category-card border border-2 rounded-3 p-3 shadow-sm h-100 text-center" role="button"
           [routerLink]="['/categoryDetails', category._id]">
