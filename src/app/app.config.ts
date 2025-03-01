@@ -2,11 +2,11 @@ import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } fr
 import { provideRouter, RouterModule } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr, ToastrModule } from 'ngx-toastr';
 import { setHeaderInterceptor } from '../core/interceptors/setHeader.interceptor';
+import { spinnerInterceptor } from '../core/interceptors/spinner.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
@@ -18,7 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch(), withInterceptors([setHeaderInterceptor])),
+    provideHttpClient(withFetch(), withInterceptors([setHeaderInterceptor, spinnerInterceptor])),
     importProvidersFrom(RouterModule, BrowserAnimationsModule, ToastrModule.forRoot())
   ],
 };

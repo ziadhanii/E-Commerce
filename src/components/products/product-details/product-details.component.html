@@ -18,9 +18,12 @@
           <span class="small">
             {{productDetails.price}} EGP
           </span>
+
           <p class="mb-0">
+
             <span [class.rating-color]="productDetails.ratingsAverage >= num" *ngFor="let num of [1,2,3,4,5]"
               class="fas fa-star font-sm "></span>
+
             {{productDetails.ratingsAverage}}
           </p>
         </div>
