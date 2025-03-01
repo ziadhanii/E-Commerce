@@ -32,7 +32,9 @@ export class AuthService {
     this.userInformation = null;
   }
 
-
-
+  getUserId(): string | null {
+    this.deCodeUserToken();
+    return this.userInformation?.id || null;
+  }
 
 }

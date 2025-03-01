@@ -13,7 +13,9 @@ import { CartService } from '../../core/services/cart.service';
 })
 export class PaymentComponent implements OnInit {
   constructor(private _ActivatedRoute: ActivatedRoute, private cartService: CartService) { }
+
   cartId: string | null = '';
+
   ngOnInit(): void {
     this._ActivatedRoute.paramMap.subscribe({
       next: (params) => {
