@@ -1,11 +1,11 @@
 import { Category } from './../../../core/interfaces/category';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductService } from '../../../core/services/product.service';
 
 @Component({
   selector: 'app-category-details',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './category-details.component.html',
   styleUrl: './category-details.component.scss'
 })

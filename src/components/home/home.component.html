@@ -28,17 +28,20 @@
 
   </section>
 
-  <section class=" py-4" *ngIf="categories.length>0">
+  <section class="py-4" *ngIf="categories.length > 0">
     <h2>Popular Categories</h2>
     <owl-carousel-o role="button" [options]="categoryOptions">
       <ng-container *ngFor="let category of categories">
         <ng-template carouselSlide>
-          <img height="300px" [src]="category.image" [alt]="category.name" [title]="category.name">
-          <h3 class="h6 text-main text-center">{{category.name}}</h3>
+          <div [routerLink]="['/categoryDetails', category._id]">
+            <img height="300px" [src]="category.image" [alt]="category.name" [title]="category.name">
+            <h3 class="h6 text-main text-center">{{ category.name }}</h3>
+          </div>
         </ng-template>
       </ng-container>
     </owl-carousel-o>
   </section>
+
 
 
   <section class="py-5" *ngIf="products.length > 0">

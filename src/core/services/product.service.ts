@@ -28,5 +28,8 @@ export class ProductService {
   getSubCategories(id: string | null): Observable<any> {
     return this.http.get(this.baseUrl + `/categories/${id}/subcategories`);
   }
+  getBrands(): Observable<any> {
+    return this.http.get(this.baseUrl + '/brands');
+  }
 
 }

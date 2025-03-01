@@ -17,6 +17,8 @@ export const routes: Routes = [
 
       { path: 'productdetails/:id', loadComponent: () => import('../components/products/product-details/product-details.component').then(m => m.ProductDetailsComponent), title: 'Product Details' },
 
+      { path: 'subcategories/:id', loadComponent: () => import('../components/categories/subcategories/subcategories.component').then(m => m.SubcategoriesComponent), title: 'Sub Categories' },
+
       { path: 'brands', loadComponent: () => import('../components/brands/brands.component').then(m => m.BrandsComponent), title: 'Brands' },
 
       { path: 'categories', loadComponent: () => import('../components/categories/categories.component').then(m => m.CategoriesComponent), title: 'Categories' },

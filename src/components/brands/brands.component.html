@@ -1,1 +1,23 @@
-<p>brands works!</p>
+<section class="py-5 w-75 mx-auto">
+  <h2 class="mb-4 fw-bold text-uppercase">Our Brands</h2>
+
+  <div class="row g-4">
+    <div *ngFor="let brand of brands" class="col-md-6 col-lg-4">
+      <div class="border rounded-3 p-4 shadow-sm text-center h-100" role="button" (click)="openBrandDetails(brand)">
+        <img [src]="brand.image" [alt]="brand.name" class="img-fluid mb-3 rounded" style="max-height: 200px;" />
+        <h3 class="text-main fw-semibold">{{ brand.name }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <p *ngIf="!brands.length" class="text-muted fs-5 text-center mt-4">
+    No brands available at the moment. Please check back later.
+  </p>
+</section>
+
+<dialog #brandDialog class="border-0 rounded p-4">
+  <h2 class="text-main fw-bold">{{ selectedBrand?.name }}</h2>
+  <img [src]="selectedBrand?.image" [alt]="selectedBrand?.name" class="img-fluid rounded mb-3" />
+  <p><strong>Slug:</strong> {{ selectedBrand?.slug }}</p>
+  <button (click)="closeDialog(brandDialog)" class="btn main-btn mt-3">Close</button>
+</dialog>

@@ -68,9 +68,12 @@ export class HomeComponent implements OnInit {
     dots: false,
     navSpeed: 700,
     autoplay: true,
-    autoplayTimeout: 5000,
+    autoplayTimeout: 4000,
     autoplaySpeed: 1000,
-    navText: ['', ''],
+    navText: [
+      '<i class="fa fa-chevron-left fa-2x"></i>',
+      '<i class="fa fa-chevron-right fa-2x"></i>'
+    ],
     responsive: {
       0: {
         items: 2
@@ -87,6 +90,7 @@ export class HomeComponent implements OnInit {
     },
     nav: true
   }
+
 
   mainSliderOptions: OwlOptions = {
     loop: true,

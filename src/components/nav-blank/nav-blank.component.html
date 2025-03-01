@@ -32,15 +32,31 @@
         </li>
       </ul>
 
-      <!-- Right-aligned: User Options -->
       <ul class="navbar-nav ms-auto align-items-center gap-3">
+
+
+
         <!-- Cart -->
         <li class="nav-item">
-          <a class="nav-link position-relative" routerLink="/cart">
-            <span class="fas fa-cart-shopping fa-2x text-dark"></span>
-            <span class="badge bg-main position-absolute top-0 end-0">{{cartNum}}</span>
+          <a class="nav-link position-relative d-flex align-items-center" routerLink="/cart">
+            <i class="fas fa-shopping-cart fa-lg text-dark"></i>
+            <span class="badge bg-main position-absolute top-0 start-100 translate-middle p-1 rounded-pill small">
+              {{cartNum}}
+            </span>
           </a>
         </li>
+
+        <!-- Wishlist -->
+        <li class="nav-item">
+          <a class="nav-link position-relative d-flex align-items-center" routerLink="/wishlist">
+            <i class="fas fa-heart fa-lg text-dark"></i>
+            <span class="badge bg-main position-absolute top-0 start-100 translate-middle p-1 rounded-pill small">
+              8
+            </span>
+          </a>
+        </li>
+
+
 
         <!-- Social Media Icons -->
         <li class="nav-item d-flex gap-2">
