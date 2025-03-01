@@ -1,14 +1,20 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm fixed-top">
+<nav #nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm fixed-top">
   <div class="container-fluid">
+    <!-- Logo -->
     <a class="navbar-brand" routerLink="">
-      <img src="assets/images/freshcart-logo.svg" alt="logo">
+      <img src="assets/images/freshcart-logo.svg" alt="Freshcart Logo" class="img-fluid" style="max-height: 40px;">
     </a>
-    <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId"
+
+    <!-- Toggler for small screens -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId"
       aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
+    <!-- Navbar Links -->
     <div class="collapse navbar-collapse" id="collapsibleNavId">
-      <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+      <!-- Left-aligned: Main Pages -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active-link" routerLink="/home">Home</a>
         </li>
@@ -24,11 +30,11 @@
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active-link" routerLink="/allorders">Orders</a>
         </li>
-
       </ul>
 
-      <ul class="navbar-nav ms-auto mt-2 mt-lg-0 align-items-center">
-
+      <!-- Right-aligned: User Options -->
+      <ul class="navbar-nav ms-auto align-items-center gap-3">
+        <!-- Cart -->
         <li class="nav-item">
           <a class="nav-link position-relative" routerLink="/cart">
             <span class="fas fa-cart-shopping fa-2x text-dark"></span>
@@ -36,21 +42,36 @@
           </a>
         </li>
 
-
-
-        <li class="nav-item d-flex gap-3 me-3">
-          <a href="https://www.facebook.com/ziad.hanii/" target="_blank" rel="noopener noreferrer"
-            class="text-dark fa-lg"><i class="fab fa-facebook"></i></a>
-          <a href="https://www.instagram.com/ziad_hanii" target="_blank" rel="noopener noreferrer"
-            class="text-dark fa-lg"><i class="fab fa-instagram"></i></a>
-          <a href="https://x.com/ziad_hanii" target="_blank" rel="noopener noreferrer" class="text-dark fa-lg"><i
-              class="fab fa-twitter"></i></a>
-          <a href="https://www.linkedin.com/in/ziad-hani/" target="_blank" rel="noopener noreferrer"
-            class="text-dark fa-lg"><i class="fab fa-linkedin"></i></a>
+        <!-- Social Media Icons -->
+        <li class="nav-item d-flex gap-2">
+          <a href="https://www.facebook.com/ziad.hanii/" target="_blank" class="text-dark" rel="noopener noreferrer"><i
+              class="fab fa-facebook fa-lg"></i></a>
+          <a href="https://www.instagram.com/ziad_hanii" target="_blank" class="text-dark" rel="noopener noreferrer"><i
+              class="fab fa-instagram fa-lg"></i></a>
+          <a href="https://x.com/ziad_hanii" target="_blank" class="text-dark" rel="noopener noreferrer"><i
+              class="fab fa-twitter fa-lg"></i></a>
+          <a href="https://www.linkedin.com/in/ziad-hani/" target="_blank" class="text-dark"
+            rel="noopener noreferrer"><i class="fab fa-linkedin fa-lg"></i></a>
         </li>
 
-        <li class="nav-item">
-          <span (click)="signOut()" role="button " class="main-btn btn">Sign Out</span>
+
+        <!-- Account Dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle d-flex align-items-center" id="navbarDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user fa-lg me-2 text-dark"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+            <li role="button" routerLink="/forget-password"><a class="dropdown-item">Forget
+                Password</a>
+            </li>
+
+            <li class="dropdown-item">
+              <a (click)="signOut()">Sign Out</a>
+            </li>
+
+          </ul>
         </li>
       </ul>
     </div>

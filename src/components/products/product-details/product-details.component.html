@@ -16,7 +16,7 @@
         <span>{{productDetails.category.name}}</span>
         <div class="d-flex align-items-center justify-content-between my-3">
           <span class="small">
-            {{productDetails.price | currency:'EGP'}}
+            {{productDetails.price}} EGP
           </span>
           <p class="mb-0">
             <span [class.rating-color]="productDetails.ratingsAverage >= num" *ngFor="let num of [1,2,3,4,5]"

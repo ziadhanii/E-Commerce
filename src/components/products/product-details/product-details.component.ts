@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-details',
-  imports: [CarouselModule, CommonModule, CutTextPipe],
+  imports: [CarouselModule, CommonModule],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss'
 })

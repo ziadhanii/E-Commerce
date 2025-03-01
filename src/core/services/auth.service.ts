@@ -18,6 +18,11 @@ export class AuthService {
     return this.http.post<any>(this.baseUrl + '/signin', userData);
   }
 
+  getUserId(): string | null {
+    this.deCodeUserToken();
+    return this.userInformation?.id || null;
+  }
+
   deCodeUserToken(): void {
     const encodeToken = localStorage.getItem('token');
     if (encodeToken != null) {
@@ -32,9 +37,15 @@ export class AuthService {
     this.userInformation = null;
   }
 
-  getUserId(): string | null {
-    this.deCodeUserToken();
-    return this.userInformation?.id || null;
+  requestResetPassword(email: string): Observable<any> {
+    return this.http.post<any>(this.baseUrl + '/forgotPasswords', { email });
   }
 
+  verifyResetCode(resetCode: string): Observable<any> {
+    return this.http.post<any>(this.baseUrl + '/verifyResetCode', { resetCode });
+  }
+
+  resetPassword(email: string, newPassword: string): Observable<any> {
+    return this.http.put<any>(this.baseUrl + '/resetPassword', { email, newPassword });
+  }
 }

@@ -22,6 +22,7 @@ export const routes: Routes = [
       { path: 'categories', loadComponent: () => import('../components/categories/categories.component').then(m => m.CategoriesComponent), title: 'Categories' },
       { path: 'payment/:id', loadComponent: () => import('../components/payment/payment.component').then(m => m.PaymentComponent), title: 'Payment' },
       { path: 'allorders', loadComponent: () => import('../components/all-orders/all-orders.component').then(m => m.AllOrdersComponent), title: 'All Orders' },
+      { path: 'forget-password', loadComponent: () => import('../components/forget-password/forget-password.component').then(m => m.ForgetPasswordComponent), title: 'Forget Password' }
     ]
   },
   //auth
@@ -32,7 +33,8 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', loadComponent: () => import('../components/login/login.component').then(m => m.LoginComponent), title: 'Login' },
-      { path: 'register', loadComponent: () => import('../components/register/register.component').then(m => m.RegisterComponent), title: 'Register' }
+      { path: 'register', loadComponent: () => import('../components/register/register.component').then(m => m.RegisterComponent), title: 'Register' },
+      { path: 'forget-password-auth', loadComponent: () => import('../components/forget-password/forget-password.component').then(m => m.ForgetPasswordComponent), title: 'Forget Password' }
     ]
   },
 

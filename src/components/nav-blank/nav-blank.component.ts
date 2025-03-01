@@ -1,6 +1,6 @@
 import { CartService } from './../../core/services/cart.service';
 import { AuthService } from './../../core/services/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild, Renderer2 } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -11,9 +11,18 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class NavBlankComponent implements OnInit {
 
-  cartNum: number = 0;
+  constructor(private authService: AuthService, private cartService: CartService, private router: Router, private renderer: Renderer2) { }
 
-  constructor(private authService: AuthService, private cartService: CartService, private router: Router) { }
+  @HostListener('window:scroll')
+  onScroll(): void {
+    const isScrolled = window.scrollY > 300;
+    this.renderer[isScrolled ? 'addClass' : 'removeClass'](this.nav.nativeElement, 'px-5');
+    this.renderer[isScrolled ? 'addClass' : 'removeClass'](this.nav.nativeElement, 'shadow');
+  }
+
+  @ViewChild('nav') nav!: ElementRef;
+
+  cartNum: number = 0;
 
   ngOnInit(): void {
     this.cartService.cartNumber.subscribe({
@@ -29,7 +38,6 @@ export class NavBlankComponent implements OnInit {
       }
     });
   }
-
   signOut() {
     this.authService.signOut();
     this.router.navigate(['/login']);
