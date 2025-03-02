@@ -120,10 +120,29 @@ input:focus {
   padding: 6px 9px;
   border-radius: 5px;
   overflow: hidden;
+  position: relative;
+
+  .heart {
+    position: absolute;
+    font-size: 30px;
+    top: 5px;
+    right: -50px;
+    z-index: 100;
+    cursor: pointer;
+    transition: 0.5s;
+
+    &:hover {
+      color: #ff0000;
+    }
+  }
 
   &:hover {
     box-shadow: $shadow;
     border: solid 1px $main-color;
+
+    .heart {
+      right: 5px;
+    }
 
     .add-btn {
       opacity: 1;

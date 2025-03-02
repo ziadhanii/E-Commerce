@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SearchPipe } from '../../core/pipe/search.pipe';
 import { FormsModule } from '@angular/forms';
+import { WishlistService } from '../../core/services/wishlist.service';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class HomeComponent implements OnInit {
   search: string = '';
 
   constructor(private productService: ProductService, private cartService: CartService,
-    private toastr: ToastrService, private renderer: Renderer2) { }
+    private toastr: ToastrService, private renderer: Renderer2, private wishlistService: WishlistService) { }
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe({
@@ -42,6 +43,7 @@ export class HomeComponent implements OnInit {
         this.categories = response.data;
       }
     });
+
   }
 
   addProduct(id: any, element: HTMLButtonElement): void {
@@ -60,6 +62,15 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
+  addProductToWishlist(id: string | undefined): void {
+    this.wishlistService.addToWishlist(id).subscribe({
+      next: (response: any) => {
+        this.toastr.success(response.message);
+      }
+    });
+  }
+
   categoryOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -90,7 +101,6 @@ export class HomeComponent implements OnInit {
     },
     nav: true
   }
-
 
   mainSliderOptions: OwlOptions = {
     loop: true,

@@ -42,8 +42,6 @@
     </owl-carousel-o>
   </section>
 
-
-
   <section class="py-5" *ngIf="products.length > 0">
     <div class="container">
 
@@ -61,6 +59,9 @@
       <div class="row g-4">
         <div class="col-sm-6 col-md-4 col-xl-4" *ngFor="let product of products | search:search | slice:0:18">
           <div class="product card border-0 shadow-sm h-100">
+
+            <i (click)="addProductToWishlist(product._id)" class="fas fa-heart heart"></i>
+
             <header role="button" [routerLink]="['/productdetails', product._id]">
               <img [src]="product.imageCover" [alt]="product.title" [title]="product.title"
                 class="card-img-top rounded" />
