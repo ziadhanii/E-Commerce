@@ -1,3 +1,4 @@
+import { preventLinkGuard } from './../core/guard/preventLink.guard';
 import { Routes } from '@angular/router';
 import { authGuard } from '../core/guard/auth.guard';
 
@@ -39,14 +40,16 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('../layouts/auth-layout/auth-layout.component').then(m => m.AuthLayoutComponent),
+    canActivate: [preventLinkGuard],
     children: [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', loadComponent: () => import('../components/login/login.component').then(m => m.LoginComponent), title: 'Login' },
       { path: 'register', loadComponent: () => import('../components/register/register.component').then(m => m.RegisterComponent), title: 'Register' },
       { path: 'forget-password-auth', loadComponent: () => import('../components/forget-password/forget-password.component').then(m => m.ForgetPasswordComponent), title: 'Forget Password' }
     ]
-  },
+  }
 
+  ,
   //Not-Found
   { path: '**', loadComponent: () => import('../components/not-found/not-found.component').then(m => m.NotFoundComponent), title: 'Not Found' }
 ];

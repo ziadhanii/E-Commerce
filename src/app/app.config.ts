@@ -7,6 +7,7 @@ import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-br
 import { provideToastr, ToastrModule } from 'ngx-toastr';
 import { setHeaderInterceptor } from '../core/interceptors/setHeader.interceptor';
 import { spinnerInterceptor } from '../core/interceptors/spinner.interceptor';
+import { errorInterceptor } from '../core/interceptors/error.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
@@ -18,7 +19,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch(), withInterceptors([setHeaderInterceptor, spinnerInterceptor])),
+    provideHttpClient(withFetch(), withInterceptors([setHeaderInterceptor, spinnerInterceptor, errorInterceptor])),
     importProvidersFrom(RouterModule, BrowserAnimationsModule, ToastrModule.forRoot())
   ],
 };
