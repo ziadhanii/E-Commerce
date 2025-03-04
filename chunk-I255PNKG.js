@@ -1,1 +1,0 @@
-import{bb as i}from"./chunk-BLPEOKRJ.js";var n=class t{transform(e,r){return e.split(" ").slice(0,r).join(" ")}static \u0275fac=function(r){return new(r||t)};static \u0275pipe=i({name:"cuttext",type:t,pure:!0})};export{n as a};
