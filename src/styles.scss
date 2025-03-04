@@ -126,13 +126,18 @@ input:focus {
     position: absolute;
     font-size: 30px;
     top: 5px;
-    right: -50px;
+    right: 5px;
     z-index: 100;
     cursor: pointer;
-    transition: 0.5s;
+    transition: right 0.5s, color 0.5s;
 
-    &:hover {
+    &.in-wishlist {
       color: #ff0000;
+      right: 5px;
+    }
+
+    &.hidden {
+      right: -50px;
     }
   }
 
@@ -140,7 +145,7 @@ input:focus {
     box-shadow: $shadow;
     border: solid 1px $main-color;
 
-    .heart {
+    .heart:not(.in-wishlist) {
       right: 5px;
     }
 

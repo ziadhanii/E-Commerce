@@ -60,7 +60,13 @@
         <div class="col-sm-6 col-md-4 col-xl-4" *ngFor="let product of products | search:search | slice:0:18">
           <div class="product card border-0 shadow-sm h-100">
 
-            <i (click)="addProductToWishlist(product._id)" class="fas fa-heart heart"></i>
+            <i *ngIf="wishListData.includes(product._id)" (click)="removeProductFromWishlist(product._id)"
+              class="fas fa-heart heart in-wishlist">
+            </i>
+
+            <i *ngIf="!wishListData.includes(product._id)" (click)="addProductToWishlist(product._id)"
+              class="fas fa-heart heart hidden">
+            </i>
 
             <header role="button" [routerLink]="['/productdetails', product._id]">
               <img [src]="product.imageCover" [alt]="product.title" [title]="product.title"

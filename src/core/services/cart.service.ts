@@ -45,4 +45,13 @@ export class CartService {
     )
   }
 
+  checkOutCash(cartId: string | null, orderInfo: object): Observable<any> {
+    return this.http.post(this.baseUrl + `/orders/${cartId}`,
+      {
+        shippingAddress: orderInfo
+      }
+    )
+  }
+
 }
+

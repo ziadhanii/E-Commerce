@@ -5,7 +5,7 @@
         <h1 class="h3">Shop Cart</h1>
         <button (click)="clearCart()" class="btn btn-sm btn-outline-danger">Clear Cart</button>
       </div>
-      <p class="text-main fw-bold">Total Price: {{cartDetails.totalCartPrice | currency:'EGP'}} </p>
+      <p class="text-main fw-bold">Total Price: {{cartDetails.totalCartPrice}} EGP </p>
 
       <div *ngFor="let item of cartDetails.products; let i = index" class="row border-bottom py-3 align-items-center">
         <div class="col-3 col-sm-2">
@@ -14,7 +14,7 @@
         <div class="col-9 col-sm-10 d-flex justify-content-between align-items-center">
           <div>
             <h3 class="h6 mb-1">{{item.product.title}}</h3>
-            <p class="text-main small">Price: {{item.price | currency:'EGP'}}</p>
+            <p class="text-main small">Price: {{item.price}} EGP </p>
             <button #btnRemove (click)="removeItem(item.product._id, btnRemove)" class="btn m-0 p-0 text-main border-0">
               <i class="fas fa-trash-can"></i> Remove
             </button>
@@ -28,9 +28,26 @@
           </div>
         </div>
       </div>
-      <button class="main-btn mt-3 px-2" [routerLink]="['/payment' , cartDetails._id]">
-        Online Payment <img src="assets/images/visa-1.svg" alt="visa-img" class="visa-img">
-      </button>
+
+      <div class="d-flex gap-3 mt-4 justify-content-center">
+        <!-- Online Payment -->
+        <button
+          class="btn main-btn d-flex justify-content-center align-items-center gap-2 px-4 py-2 rounded-pill fw-bold w-50 text-center"
+          (click)="navigateToPayment('card')">
+          <img src="assets/images/visa-1.svg" alt="visa-img" class="visa-img">
+          <span>Online Payment</span>
+        </button>
+
+        <!-- Cash on Delivery -->
+        <button
+          class="btn btn-primary d-flex justify-content-center align-items-center gap-2 px-4 py-2 rounded-pill fw-bold w-50 text-center"
+          (click)="navigateToPayment('cash')">
+          <img src="assets/images/icons8-cash-80.png" alt="cash-img" class="visa-img"
+            style="width: 25px; height: 25px;">
+          <span>Cash On Delivery</span>
+        </button>
+      </div>
+
     </div>
   </div>
 

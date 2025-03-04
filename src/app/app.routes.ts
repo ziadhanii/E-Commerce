@@ -13,6 +13,8 @@ export const routes: Routes = [
 
       { path: 'cart', loadComponent: () => import('../components/cart/cart.component').then(m => m.CartComponent), title: 'Cart' },
 
+      { path: 'wishlist', loadComponent: () => import('../components/wishlist/wishlist.component').then(m => m.WishlistComponent), title: 'Wishlist' },
+
       { path: 'products', loadComponent: () => import('../components/products/products.component').then(m => m.ProductsComponent), title: 'Products' },
 
       { path: 'productdetails/:id', loadComponent: () => import('../components/products/product-details/product-details.component').then(m => m.ProductDetailsComponent), title: 'Product Details' },

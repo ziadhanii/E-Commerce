@@ -1,7 +1,7 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { CartService } from '../../core/services/cart.service';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -14,13 +14,11 @@ export class CartComponent implements OnInit {
 
   cartDetails: any = null;
 
-  constructor(private cartService: CartService, private renderer: Renderer2) { }
+  constructor(private cartService: CartService, private renderer: Renderer2, private router: Router) { }
 
   ngOnInit(): void {
     this.cartService.getLoggedUserCart().subscribe({
       next: (response) => {
-        console.log(response);
-
         this.cartDetails = response.data
       }
     })
@@ -72,6 +70,16 @@ export class CartComponent implements OnInit {
     })
 
 
+  }
+
+  navigateToPayment(paymentMethod: string): void {
+    if (this.cartDetails?._id) {
+      this.router.navigate(['/payment', this.cartDetails._id], {
+        queryParams: { paymentMethod: paymentMethod }
+      });
+    } else {
+      console.error('Cart ID is missing');
+    }
   }
 
 }

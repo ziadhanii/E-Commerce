@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { CartService } from '../../core/services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { WishlistService } from '../../core/services/wishlist.service';
 
 
 @Component({
@@ -22,9 +23,10 @@ export class ProductsComponent implements OnInit {
   pageSize: number = 0;
   currentPage: number = 1;
   totalItems: number = 0;
+  wishListData: any[] = [];
 
   constructor(private productService: ProductService, private cartService: CartService,
-    private toastr: ToastrService, private renderer: Renderer2) { }
+    private toastr: ToastrService, private renderer: Renderer2, private wishlistService: WishlistService) { }
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe({
@@ -34,6 +36,13 @@ export class ProductsComponent implements OnInit {
         this.pageSize = response.metadata.limit;
         this.currentPage = response.metadata.currentPage;
         this.totalItems = response.results;
+      }
+    });
+
+    this.wishlistService.getWishlist().subscribe({
+      next: (response) => {
+        const newData = response.data.map((item: any) => item._id);
+        this.wishListData = newData;
       }
     });
   }
@@ -63,6 +72,25 @@ export class ProductsComponent implements OnInit {
         this.currentPage = response.metadata.currentPage;
         this.totalItems = response.results;
       },
+    });
+  }
+
+
+  addProductToWishlist(id: string | undefined): void {
+    this.wishlistService.addToWishlist(id).subscribe({
+      next: (response: any) => {
+        this.toastr.success(response.message);
+        this.wishListData = response.data;
+      }
+    });
+  }
+
+  removeProductFromWishlist(id: string | undefined): void {
+    this.wishlistService.removeFromWishlist(id).subscribe({
+      next: (response: any) => {
+        this.toastr.success(response.message);
+        this.wishListData = response.data;
+      }
     });
   }
 

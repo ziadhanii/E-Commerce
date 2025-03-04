@@ -1,7 +1,9 @@
-import { CartService } from './../../core/services/cart.service';
-import { AuthService } from './../../core/services/auth.service';
-import { Component, ElementRef, HostListener, OnInit, ViewChild, Renderer2 } from '@angular/core';
+import { Component, OnInit, ElementRef, HostListener, ViewChild, Renderer2 } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+
+import { AuthService } from './../../core/services/auth.service';
+import { CartService } from './../../core/services/cart.service';
+import { WishlistService } from './../../core/services/wishlist.service';
 
 @Component({
   selector: 'app-nav-blank',
@@ -11,7 +13,23 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class NavBlankComponent implements OnInit {
 
-  constructor(private authService: AuthService, private cartService: CartService, private router: Router, private renderer: Renderer2) { }
+  @ViewChild('nav') nav!: ElementRef;
+
+  cartNum: number = 0;
+  wishListNumber: number = 0;
+
+  constructor(
+    private authService: AuthService,
+    private cartService: CartService,
+    private wishlistService: WishlistService,
+    private router: Router,
+    private renderer: Renderer2
+  ) { }
+
+  ngOnInit(): void {
+    this.initializeCart();
+    this.initializeWishlist();
+  }
 
   @HostListener('window:scroll')
   onScroll(): void {
@@ -20,28 +38,32 @@ export class NavBlankComponent implements OnInit {
     this.renderer[isScrolled ? 'addClass' : 'removeClass'](this.nav.nativeElement, 'shadow');
   }
 
-  @ViewChild('nav') nav!: ElementRef;
+  private initializeCart(): void {
+    this.cartService.getLoggedUserCart().subscribe({
+      next: (response) => {
+        this.cartNum = response.numOfCartItems;
+      }
+    });
 
-  cartNum: number = 0;
-
-  ngOnInit(): void {
     this.cartService.cartNumber.subscribe({
       next: (num) => {
         this.cartNum = num;
       }
     });
+  }
 
-    this.cartService.getLoggedUserCart().subscribe({
-      next: (response) => {
-        console.log(response);
-        this.cartNum = response.numOfCartItems;
-      }
+  private initializeWishlist(): void {
+    this.wishlistService.getWishlist().subscribe(response => {
+      this.wishlistService.wishListNumber.next(response?.data?.length ?? 0);
+    });
+
+    this.wishlistService.wishListNumber.subscribe(count => {
+      this.wishListNumber = count;
     });
   }
-  signOut() {
+
+  signOut(): void {
     this.authService.signOut();
     this.router.navigate(['/login']);
   }
 }
-
-

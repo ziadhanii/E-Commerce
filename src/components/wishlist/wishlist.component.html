@@ -1,0 +1,41 @@
+<div class="container py-4">
+  <div *ngIf="wishListData.length > 0; else emptyWishlist">
+    <div class="row g-3">
+      @for (item of wishListData; track item?._id) {
+      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+        <div class="card bg-light rounded-3 p-3 h-100 d-flex flex-column justify-content-between">
+          <div [routerLink]="['/productdetails', item._id]" class="cursor-pointer">
+            <div class="image">
+              <img [src]="item.imageCover" class="w-100 rounded-3" alt="{{ item.title }}">
+            </div>
+            <div class="content mt-3">
+              <h5 class="text-truncate">{{ item.title |cuttext:3}}</h5>
+              <div class="d-flex align-items-center mt-2">
+                <i class="fa fa-star text-warning me-1"></i>
+                <span>{{ item.ratingsAverage }}</span>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <span class="price fw-bold text-success">${{ item.price }}</span>
+                <span class="sale text-muted text-decoration-line-through">${{ item.price + 100 }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between mt-3">
+            <button class="btn btn-sm btn-outline-secondary w-50" (click)="addProductToCart(item._id)">Add To
+              Cart</button>
+            <button class="btn btn-sm btn-outline-danger w-50 ms-2"
+              (click)="deleteProductFromWishlist(item._id)">Delete</button>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+
+  <ng-template #emptyWishlist>
+    <div class="text-center py-5">
+      <h3 class="text-muted">Your Wishlist is empty</h3>
+      <p>Add some products to your wishlist to see them here.</p>
+    </div>
+  </ng-template>
+</div>

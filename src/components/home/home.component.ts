@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
 
   products: product[] = [];
   categories: Category[] = [];
+  wishListData: any[] = [];
 
   search: string = '';
 
@@ -44,16 +45,20 @@ export class HomeComponent implements OnInit {
       }
     });
 
+    this.wishlistService.getWishlist().subscribe({
+      next: (response) => {
+        const newData = response.data.map((item: any) => item._id);
+        this.wishListData = newData;
+      }
+    });
+
   }
 
   addProduct(id: any, element: HTMLButtonElement): void {
     this.renderer.setAttribute(element, 'disabled', 'true')
     this.cartService.addToCart(id).subscribe({
       next: (response) => {
-        console.log(response);
-        this.toastr.success(response.message, '', {
-          positionClass: 'toast-top-right'
-        });
+        this.toastr.success(response.message);
         this.renderer.removeAttribute(element, 'disabled');
         this.cartService.cartNumber.next(response.numOfCartItems);
       },
@@ -67,9 +72,20 @@ export class HomeComponent implements OnInit {
     this.wishlistService.addToWishlist(id).subscribe({
       next: (response: any) => {
         this.toastr.success(response.message);
+        this.wishListData = response.data;
       }
     });
   }
+
+  removeProductFromWishlist(id: string | undefined): void {
+    this.wishlistService.removeFromWishlist(id).subscribe({
+      next: (response: any) => {
+        this.toastr.success(response.message);
+        this.wishListData = response.data;
+      }
+    });
+  }
+
 
   categoryOptions: OwlOptions = {
     loop: true,

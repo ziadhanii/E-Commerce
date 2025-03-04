@@ -9,6 +9,14 @@
       totalItems: totalItems }">
         <div class="product card border-0 shadow-sm h-100">
 
+          <i *ngIf="wishListData.includes(product._id)" (click)="removeProductFromWishlist(product._id)"
+            class="fas fa-heart heart in-wishlist">
+          </i>
+
+          <i *ngIf="!wishListData.includes(product._id)" (click)="addProductToWishlist(product._id)"
+            class="fas fa-heart heart hidden">
+          </i>
+
           <header role="button" [routerLink]="[ '/productdetails' , product._id ]">
             <img [src]="product.imageCover" [alt]="product.title" [title]="product.title"
               class="card-img-top rounded" />
